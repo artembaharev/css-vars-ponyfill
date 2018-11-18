@@ -961,6 +961,7 @@ var isNativeSupport = isBrowser && window.CSS && window.CSS.supports && window.C
 
 var defaults = {
     rootElement: isBrowser ? document : null,
+    ignoreReady: false,
     include: "style,link[rel=stylesheet]",
     exclude: "",
     fixNestedCalc: true,
@@ -1111,7 +1112,7 @@ var isShadowDOMReady = false;
     if (!isBrowser) {
         return;
     }
-    if (document.readyState !== "loading") {
+    if (document.readyState !== "loading" || settings.ignoreReady) {
         var isShadowElm = settings.shadowDOM || settings.rootElement.shadowRoot || settings.rootElement.host;
         if (isNativeSupport && settings.onlyLegacy) {
             if (settings.updateDOM) {

@@ -15,6 +15,7 @@ const isNativeSupport = isBrowser && window.CSS && window.CSS.supports && window
 const defaults = {
     // Sources
     rootElement  : isBrowser ? document : null,
+    ignoreReady  : false,
     include      : 'style,link[rel=stylesheet]',
     exclude      : '',
     // Options
@@ -192,7 +193,7 @@ function cssVars(options = {}) {
     }
 
     // Verify readyState to ensure all <link> and <style> nodes are available
-    if (document.readyState !== 'loading') {
+    if (document.readyState !== 'loading' || settings.ignoreReady) {
         const isShadowElm = settings.shadowDOM || settings.rootElement.shadowRoot || settings.rootElement.host;
 
         // Native support
